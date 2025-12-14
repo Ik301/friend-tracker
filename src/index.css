@@ -33,26 +33,12 @@ body {
 }
 
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #9d6b53 #3d241a;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #3d241a;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #9d6b53;
-  border-radius: 4px;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background-color: #b07d62;
+  display: none;
 }
 
 /* Animations for Garden Visualization */
