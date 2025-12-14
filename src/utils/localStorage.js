@@ -1,4 +1,5 @@
-const STORAGE_KEY = 'friendTrackerData';
+const STORAGE_KEY_PREFIX = 'friendTrackerData_';
+const USER_ID_KEY = 'friendTrackerUserId';
 
 const DEFAULT_DATA = {
   friends: [],
@@ -45,9 +46,26 @@ const DEFAULT_DATA = {
   notifications: []
 };
 
+export const getCurrentUserId = () => {
+  return localStorage.getItem(USER_ID_KEY);
+};
+
+export const setUserId = (userId) => {
+  localStorage.setItem(USER_ID_KEY, userId);
+};
+
+export const clearUserId = () => {
+  localStorage.removeItem(USER_ID_KEY);
+};
+
+const getStorageKey = () => {
+  const userId = getCurrentUserId();
+  return userId ? `${STORAGE_KEY_PREFIX}${userId}` : STORAGE_KEY_PREFIX + 'default';
+};
+
 export const loadData = () => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(getStorageKey());
     if (!stored) {
       return DEFAULT_DATA;
     }
@@ -68,7 +86,7 @@ export const loadData = () => {
 
 export const saveData = (data) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(getStorageKey(), JSON.stringify(data));
     return true;
   } catch (error) {
     console.error('Error saving data to localStorage:', error);

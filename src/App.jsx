@@ -1,12 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppProvider } from './context/AppContext';
 import Dashboard from './components/Dashboard';
 import CategoryManager from './components/CategoryManager';
 import NotificationPanel from './components/NotificationPanel';
+import Login from './components/Login';
+import { getCurrentUserId, clearUserId } from './utils/localStorage';
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [showNotifications, setShowNotifications] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserIdState] = useState(null);
+
+  useEffect(() => {
+    const storedUserId = getCurrentUserId();
+    if (storedUserId) {
+      setUserIdState(storedUserId);
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = (code) => {
+    setUserIdState(code);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to logout? Your data will remain saved.')) {
+      clearUserId();
+      setIsLoggedIn(false);
+      setUserIdState(null);
+      setCurrentView('dashboard');
+    }
+  };
+
+  if (!isLoggedIn) {
+    return <Login onLogin={handleLogin} />;
+  }
 
   return (
     <AppProvider>
@@ -37,24 +67,33 @@ function App() {
                   Categories
                 </button>
               </div>
-              <button
-                onClick={() => setShowNotifications(true)}
-                className="relative p-2 text-gray-400 hover:text-white hover:bg-[#1a1a1a] rounded-lg transition-all"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div className="flex items-center gap-2">
+                <span className="text-gray-500 text-sm">Code: {userId}</span>
+                <button
+                  onClick={handleLogout}
+                  className="text-gray-400 hover:text-white hover:bg-[#1a1a1a] px-3 py-2 rounded-lg transition-all text-sm"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-              </button>
+                  Logout
+                </button>
+                <button
+                  onClick={() => setShowNotifications(true)}
+                  className="relative p-2 text-gray-400 hover:text-white hover:bg-[#1a1a1a] rounded-lg transition-all"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </nav>
