@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import CategoryManager from './components/CategoryManager';
 import NotificationPanel from './components/NotificationPanel';
 import Settings from './components/Settings';
+import SerendipityMode from './components/SerendipityMode';
 import Login from './components/Login';
 import { getCurrentUserId, clearUserId } from './utils/localStorage';
 
@@ -56,6 +57,16 @@ function App() {
                   }`}
                 >
                   Dashboard
+                </button>
+                <button
+                  onClick={() => setCurrentView('serendipity')}
+                  className={`px-4 py-2 rounded-lg transition-all ${
+                    currentView === 'serendipity'
+                      ? 'bg-[#edc4b3] text-[#2d1810]'
+                      : 'text-[#c38e70] hover:text-[#edc4b3] hover:bg-[#4a2f1f]'
+                  }`}
+                >
+                  Serendipity
                 </button>
                 <button
                   onClick={() => setCurrentView('categories')}
@@ -112,6 +123,7 @@ function App() {
         {/* Main Content */}
         <main className="py-6">
           {currentView === 'dashboard' && <Dashboard />}
+          {currentView === 'serendipity' && <SerendipityMode />}
           {currentView === 'categories' && <CategoryManager />}
           {currentView === 'settings' && <Settings />}
         </main>
