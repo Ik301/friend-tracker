@@ -109,16 +109,16 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-[#111111] border border-[#222222] rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-[#2d1810]/95 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-[#3d241a] border border-[#774936] rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-[#edc4b3]">
               {friend ? 'Edit Friend' : 'Add New Friend'}
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-white text-2xl"
+              className="text-[#b07d62] hover:text-[#edc4b3] text-2xl"
             >
               ×
             </button>
@@ -126,20 +126,20 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-white mb-1">
+              <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                 Name *
               </label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-white mb-1">
+              <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                 Contact Info *
               </label>
               <input
@@ -147,25 +147,25 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                 value={formData.contact}
                 onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
                 placeholder="Phone, email, or social media handle"
-                className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-white mb-1">
+              <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                 Last Contacted
               </label>
               <input
                 type="date"
                 value={formData.lastContacted}
                 onChange={(e) => setFormData({ ...formData, lastContacted: e.target.value })}
-                className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-white mb-2">
+              <label className="block text-sm font-medium text-[#edc4b3] mb-2">
                 Categories
               </label>
               <div className="flex flex-wrap gap-2">
@@ -176,8 +176,8 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                     onClick={() => handleCategoryToggle(category.id)}
                     className={`px-4 py-2 rounded-lg border-2 transition-all ${
                       formData.categories.includes(category.id)
-                        ? 'border-gray-800 text-white'
-                        : 'border-[#333333] text-white hover:border-gray-400'
+                        ? 'border-gray-800 text-[#edc4b3]'
+                        : 'border-[#8a5a44] text-[#edc4b3] hover:border-gray-400'
                     }`}
                     style={{
                       backgroundColor: formData.categories.includes(category.id) ? category.color : 'white'
@@ -191,7 +191,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-white mb-1">
+                <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                   Contact Every
                 </label>
                 <input
@@ -205,12 +205,12 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                       value: parseInt(e.target.value)
                     }
                   })}
-                  className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                  className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-white mb-1">
+                <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                   Unit
                 </label>
                 <select
@@ -222,7 +222,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                       unit: e.target.value
                     }
                   })}
-                  className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                  className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                 >
                   <option value="days">Days</option>
                   <option value="weeks">Weeks</option>
@@ -232,7 +232,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-white mb-1">
+              <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                 Notes
               </label>
               <textarea
@@ -240,13 +240,13 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 placeholder="What did you talk about last time?"
                 rows="3"
-                className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
               />
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-white">
+                <label className="block text-sm font-medium text-[#edc4b3]">
                   Important Dates
                 </label>
                 <button
@@ -260,27 +260,27 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
 
               <div className="space-y-3">
                 {formData.importantDates.map((date, index) => (
-                  <div key={date.id} className="p-3 border border-[#222222] rounded-lg">
+                  <div key={date.id} className="p-3 border border-[#774936] rounded-lg">
                     <div className="grid grid-cols-2 gap-2 mb-2">
                       <input
                         type="text"
                         value={date.title}
                         onChange={(e) => updateImportantDate(index, 'title', e.target.value)}
                         placeholder="Event name"
-                        className="px-2 py-1 border border-[#333333] rounded text-sm"
+                        className="px-2 py-1 border border-[#8a5a44] rounded text-sm"
                       />
                       <input
                         type="date"
                         value={date.date}
                         onChange={(e) => updateImportantDate(index, 'date', e.target.value)}
-                        className="px-2 py-1 border border-[#333333] rounded text-sm"
+                        className="px-2 py-1 border border-[#8a5a44] rounded text-sm"
                       />
                     </div>
                     <div className="flex gap-2 items-center">
                       <select
                         value={date.type}
                         onChange={(e) => updateImportantDate(index, 'type', e.target.value)}
-                        className="px-2 py-1 border border-[#333333] rounded text-sm flex-1"
+                        className="px-2 py-1 border border-[#8a5a44] rounded text-sm flex-1"
                       >
                         <option value="one-time">One-time</option>
                         <option value="recurring">Recurring</option>
@@ -301,14 +301,14 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
             <div className="flex gap-3 pt-4">
               <button
                 type="submit"
-                className="flex-1 bg-white hover:bg-gray-200 text-black text-white px-6 py-3 rounded-lg transition-colors font-medium"
+                className="flex-1 bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] text-[#edc4b3] px-6 py-3 rounded-lg transition-colors font-medium"
               >
                 {friend ? 'Update Friend' : 'Add Friend'}
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-3 bg-[#222222] hover:bg-gray-300 text-white rounded-lg transition-colors"
+                className="px-6 py-3 bg-[#222222] hover:bg-gray-300 text-[#edc4b3] rounded-lg transition-colors"
               >
                 Cancel
               </button>

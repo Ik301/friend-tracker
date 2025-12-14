@@ -116,25 +116,25 @@ const Dashboard = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-2">Friend Contact Tracker</h1>
-        <p className="text-gray-500">Stay connected with the people who matter</p>
+        <h1 className="text-4xl font-bold text-[#edc4b3] mb-2">Friend Contact Tracker</h1>
+        <p className="text-[#b07d62]">Stay connected with the people who matter</p>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-[#111111] border border-[#222222] rounded-lg p-4">
-          <p className="text-sm text-gray-500">Total Friends</p>
-          <p className="text-3xl font-bold text-white">{stats.total}</p>
+        <div className="bg-[#3d241a] border border-[#774936] rounded-lg p-4">
+          <p className="text-sm text-[#b07d62]">Total Friends</p>
+          <p className="text-3xl font-bold text-[#edc4b3]">{stats.total}</p>
         </div>
-        <div className="bg-[#111111] border border-orange-900/30 rounded-lg p-4">
+        <div className="bg-[#3d241a] border border-orange-900/30 rounded-lg p-4">
           <p className="text-sm text-orange-400">Due Today</p>
           <p className="text-3xl font-bold text-orange-400">{stats.dueToday}</p>
         </div>
-        <div className="bg-[#111111] border border-red-900/30 rounded-lg p-4">
+        <div className="bg-[#3d241a] border border-red-900/30 rounded-lg p-4">
           <p className="text-sm text-red-400">Overdue</p>
           <p className="text-3xl font-bold text-red-400">{stats.overdue}</p>
         </div>
-        <div className="bg-[#111111] border border-blue-900/30 rounded-lg p-4">
+        <div className="bg-[#3d241a] border border-blue-900/30 rounded-lg p-4">
           <p className="text-sm text-blue-400">Upcoming Events</p>
           <p className="text-3xl font-bold text-blue-400">{stats.upcomingDates}</p>
         </div>
@@ -142,16 +142,16 @@ const Dashboard = () => {
 
       {/* Upcoming Important Dates */}
       {upcomingDates.length > 0 && (
-        <div className="bg-[#111111] border-l-4 border-blue-500 rounded-lg p-4 mb-8">
-          <h3 className="font-semibold text-white mb-3">Upcoming Important Dates</h3>
+        <div className="bg-[#3d241a] border-l-4 border-blue-500 rounded-lg p-4 mb-8">
+          <h3 className="font-semibold text-[#edc4b3] mb-3">Upcoming Important Dates</h3>
           <div className="space-y-2">
             {upcomingDates.slice(0, 5).map(date => (
               <div key={`${date.friendId}-${date.id}`} className="flex justify-between items-center text-sm">
                 <div>
-                  <span className="font-medium text-white">{date.friendName}</span>
-                  <span className="text-gray-400"> - {date.title}</span>
+                  <span className="font-medium text-[#edc4b3]">{date.friendName}</span>
+                  <span className="text-[#c38e70]"> - {date.title}</span>
                 </div>
-                <span className="text-gray-500">
+                <span className="text-[#b07d62]">
                   {date.daysUntil === 0 ? 'Today' : `In ${date.daysUntil} day${date.daysUntil !== 1 ? 's' : ''}`}
                 </span>
               </div>
@@ -161,33 +161,33 @@ const Dashboard = () => {
       )}
 
       {/* Filters and Controls */}
-      <div className="bg-[#111111] border border-[#222222] rounded-lg p-6 mb-6">
+      <div className="bg-[#3d241a] border border-[#774936] rounded-lg p-6 mb-6">
         <div className="flex flex-col lg:flex-row gap-4 mb-4">
           <input
             type="text"
             placeholder="Search friends..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 px-4 py-2 bg-[#0a0a0a] border border-[#222222] text-white placeholder-gray-600 rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all"
+            className="flex-1 px-4 py-2 bg-[#2d1810] border border-[#774936] text-[#edc4b3] placeholder-[#9d6b53] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all"
           />
           <button
             onClick={() => setShowAddForm(true)}
-            className="bg-white hover:bg-gray-200 text-black px-6 py-2 rounded-lg transition-all whitespace-nowrap font-medium"
+            className="bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] px-6 py-2 rounded-lg transition-all whitespace-nowrap font-medium"
           >
             + Add Friend
           </button>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          <span className="text-sm font-medium text-gray-500 self-center">Categories:</span>
+          <span className="text-sm font-medium text-[#b07d62] self-center">Categories:</span>
           {categories.map(category => (
             <button
               key={category.id}
               onClick={() => handleCategoryFilterToggle(category.id)}
               className={`px-3 py-1 rounded-full text-sm transition-all ${
                 selectedCategories.includes(category.id)
-                  ? 'text-white'
-                  : 'bg-[#1a1a1a] text-gray-400 hover:bg-[#222222] border border-[#333333]'
+                  ? 'text-[#edc4b3]'
+                  : 'bg-[#4a2f1f] text-[#c38e70] hover:bg-[#222222] border border-[#8a5a44]'
               }`}
               style={{
                 backgroundColor: selectedCategories.includes(category.id) ? category.color : undefined,
@@ -200,7 +200,7 @@ const Dashboard = () => {
           {selectedCategories.length > 0 && (
             <button
               onClick={() => setSelectedCategories([])}
-              className="text-sm text-gray-500 hover:text-white underline"
+              className="text-sm text-[#b07d62] hover:text-[#edc4b3] underline"
             >
               Clear
             </button>
@@ -209,11 +209,11 @@ const Dashboard = () => {
 
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
-            <label className="block text-sm text-gray-500 mb-1">Status</label>
+            <label className="block text-sm text-[#b07d62] mb-1">Status</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#222222] text-white rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+              className="w-full px-3 py-2 bg-[#2d1810] border border-[#774936] text-[#edc4b3] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
             >
               <option value="all">All Friends</option>
               <option value="due-today">Due Today</option>
@@ -222,11 +222,11 @@ const Dashboard = () => {
             </select>
           </div>
           <div className="flex-1">
-            <label className="block text-sm text-gray-500 mb-1">Sort By</label>
+            <label className="block text-sm text-[#b07d62] mb-1">Sort By</label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0a0a0a] border border-[#222222] text-white rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+              className="w-full px-3 py-2 bg-[#2d1810] border border-[#774936] text-[#edc4b3] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
             >
               <option value="next-due">Next Due Date</option>
               <option value="last-contacted">Last Contacted</option>
@@ -241,7 +241,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredAndSortedFriends.length === 0 ? (
           <div className="col-span-full text-center py-12">
-            <p className="text-gray-500 text-lg">
+            <p className="text-[#b07d62] text-lg">
               {friends.length === 0
                 ? "No friends yet. Add your first friend to get started!"
                 : "No friends match your filters."}

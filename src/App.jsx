@@ -40,9 +40,9 @@ function App() {
 
   return (
     <AppProvider>
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <div className="min-h-screen bg-[#2d1810]">
         {/* Navigation */}
-        <nav className="bg-[#111111] border-b border-[#222222]">
+        <nav className="bg-[#3d241a] border-b border-[#774936]">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex justify-between items-center h-16">
               <div className="flex space-x-2">
@@ -50,8 +50,8 @@ function App() {
                   onClick={() => setCurrentView('dashboard')}
                   className={`px-4 py-2 rounded-lg transition-all ${
                     currentView === 'dashboard'
-                      ? 'bg-white text-black'
-                      : 'text-gray-400 hover:text-white hover:bg-[#1a1a1a]'
+                      ? 'bg-[#edc4b3] text-[#2d1810]'
+                      : 'text-[#c38e70] hover:text-[#edc4b3] hover:bg-[#4a2f1f]'
                   }`}
                 >
                   Dashboard
@@ -60,24 +60,24 @@ function App() {
                   onClick={() => setCurrentView('categories')}
                   className={`px-4 py-2 rounded-lg transition-all ${
                     currentView === 'categories'
-                      ? 'bg-white text-black'
-                      : 'text-gray-400 hover:text-white hover:bg-[#1a1a1a]'
+                      ? 'bg-[#edc4b3] text-[#2d1810]'
+                      : 'text-[#c38e70] hover:text-[#edc4b3] hover:bg-[#4a2f1f]'
                   }`}
                 >
                   Categories
                 </button>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-500 text-sm">Code: {userId}</span>
+                <span className="text-[#b07d62] text-sm">Code: {userId}</span>
                 <button
                   onClick={handleLogout}
-                  className="text-gray-400 hover:text-white hover:bg-[#1a1a1a] px-3 py-2 rounded-lg transition-all text-sm"
+                  className="text-[#c38e70] hover:text-[#edc4b3] hover:bg-[#4a2f1f] px-3 py-2 rounded-lg transition-all text-sm"
                 >
                   Logout
                 </button>
                 <button
                   onClick={() => setShowNotifications(true)}
-                  className="relative p-2 text-gray-400 hover:text-white hover:bg-[#1a1a1a] rounded-lg transition-all"
+                  className="relative p-2 text-[#c38e70] hover:text-[#edc4b3] hover:bg-[#4a2f1f] rounded-lg transition-all"
                 >
                   <svg
                     className="w-6 h-6"

@@ -64,38 +64,38 @@ const CategoryManager = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-white">Manage Categories</h2>
+        <h2 className="text-2xl font-bold text-[#edc4b3]">Manage Categories</h2>
         <button
           onClick={() => setIsAdding(true)}
-          className="bg-white hover:bg-gray-200 text-black text-white px-4 py-2 rounded-lg transition-colors"
+          className="bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] text-[#edc4b3] px-4 py-2 rounded-lg transition-colors"
         >
           Add Category
         </button>
       </div>
 
       {isAdding && (
-        <div className="bg-[#111111] border border-[#222222] rounded-lg border border-[#222222] p-6 mb-6">
+        <div className="bg-[#3d241a] border border-[#774936] rounded-lg border border-[#774936] p-6 mb-6">
           <h3 className="text-xl font-semibold mb-4">
             {editingId ? 'Edit Category' : 'New Category'}
           </h3>
           <form onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-white mb-1">
+                <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                   Category Name
                 </label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                  className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-white mb-1">
+                  <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                     Default Frequency
                   </label>
                   <input
@@ -109,12 +109,12 @@ const CategoryManager = () => {
                         value: parseInt(e.target.value)
                       }
                     })}
-                    className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                    className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-white mb-1">
+                  <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                     Unit
                   </label>
                   <select
@@ -126,7 +126,7 @@ const CategoryManager = () => {
                         unit: e.target.value
                       }
                     })}
-                    className="w-full px-3 py-2 border border-[#333333] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                    className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                   >
                     <option value="days">Days</option>
                     <option value="weeks">Weeks</option>
@@ -136,7 +136,7 @@ const CategoryManager = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-1">
+                <label className="block text-sm font-medium text-[#edc4b3] mb-1">
                   Color
                 </label>
                 <div className="flex gap-2">
@@ -146,7 +146,7 @@ const CategoryManager = () => {
                       type="button"
                       onClick={() => setFormData({ ...formData, color: color.value })}
                       className={`w-10 h-10 rounded-full border-2 transition-all ${
-                        formData.color === color.value ? 'border-gray-800 scale-110' : 'border-[#333333]'
+                        formData.color === color.value ? 'border-gray-800 scale-110' : 'border-[#8a5a44]'
                       }`}
                       style={{ backgroundColor: color.value }}
                       title={color.name}
@@ -158,14 +158,14 @@ const CategoryManager = () => {
               <div className="flex gap-2 pt-4">
                 <button
                   type="submit"
-                  className="bg-white hover:bg-gray-200 text-black text-white px-6 py-2 rounded-lg transition-colors"
+                  className="bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] text-[#edc4b3] px-6 py-2 rounded-lg transition-colors"
                 >
                   {editingId ? 'Update' : 'Create'}
                 </button>
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="bg-[#222222] hover:bg-gray-300 text-white px-6 py-2 rounded-lg transition-colors"
+                  className="bg-[#222222] hover:bg-gray-300 text-[#edc4b3] px-6 py-2 rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
@@ -182,7 +182,7 @@ const CategoryManager = () => {
           return (
             <div
               key={category.id}
-              className="bg-[#111111] border border-[#222222] rounded-lg border border-[#222222] p-4 flex items-center justify-between"
+              className="bg-[#3d241a] border border-[#774936] rounded-lg border border-[#774936] p-4 flex items-center justify-between"
             >
               <div className="flex items-center gap-4">
                 <div
@@ -190,8 +190,8 @@ const CategoryManager = () => {
                   style={{ backgroundColor: category.color }}
                 />
                 <div>
-                  <h3 className="font-semibold text-lg text-white">{category.name}</h3>
-                  <p className="text-sm text-gray-400">
+                  <h3 className="font-semibold text-lg text-[#edc4b3]">{category.name}</h3>
+                  <p className="text-sm text-[#c38e70]">
                     Contact every {category.defaultFrequency.value} {category.defaultFrequency.unit}
                     {' • '}
                     {friendCount} friend{friendCount !== 1 ? 's' : ''}
@@ -201,7 +201,7 @@ const CategoryManager = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleEdit(category)}
-                  className="text-gray-400 hover:text-white px-3 py-1 rounded transition-colors"
+                  className="text-[#c38e70] hover:text-[#edc4b3] px-3 py-1 rounded transition-colors"
                 >
                   Edit
                 </button>

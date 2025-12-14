@@ -86,21 +86,21 @@ const NotificationPanel = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-[#111111] border border-[#222222] rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
-        <div className="p-6 border-b border-[#222222]">
+    <div className="fixed inset-0 bg-[#2d1810]/95 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-[#3d241a] border border-[#774936] rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+        <div className="p-6 border-b border-[#774936]">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-[#edc4b3]">
               Notifications
               {unreadCount > 0 && (
-                <span className="ml-2 bg-red-500 text-white text-sm px-2 py-1 rounded-full">
+                <span className="ml-2 bg-red-500 text-[#edc4b3] text-sm px-2 py-1 rounded-full">
                   {unreadCount}
                 </span>
               )}
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-500 hover:text-white text-2xl"
+              className="text-[#b07d62] hover:text-[#edc4b3] text-2xl"
             >
               ×
             </button>
@@ -110,7 +110,7 @@ const NotificationPanel = ({ isOpen, onClose }) => {
         <div className="overflow-y-auto max-h-[calc(80vh-120px)] p-6">
           {allNotifications.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500">No notifications</p>
+              <p className="text-[#b07d62]">No notifications</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -120,11 +120,11 @@ const NotificationPanel = ({ isOpen, onClose }) => {
                   className={`border rounded-lg p-4 ${getPriorityColor(notification.priority)}`}
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-white">{notification.title}</h3>
+                    <h3 className="font-semibold text-[#edc4b3]">{notification.title}</h3>
                     {notification.dismissible !== false && (
                       <button
                         onClick={() => dismissNotification(notification.id)}
-                        className="text-gray-500 hover:text-white"
+                        className="text-[#b07d62] hover:text-[#edc4b3]"
                       >
                         ×
                       </button>
@@ -132,13 +132,13 @@ const NotificationPanel = ({ isOpen, onClose }) => {
                   </div>
 
                   {notification.friends && (
-                    <div className="text-sm text-white">
+                    <div className="text-sm text-[#edc4b3]">
                       <ul className="list-disc list-inside">
                         {notification.friends.slice(0, 5).map((name, idx) => (
                           <li key={idx}>{name}</li>
                         ))}
                         {notification.friends.length > 5 && (
-                          <li className="text-gray-500">
+                          <li className="text-[#b07d62]">
                             and {notification.friends.length - 5} more...
                           </li>
                         )}
@@ -147,11 +147,11 @@ const NotificationPanel = ({ isOpen, onClose }) => {
                   )}
 
                   {notification.dates && (
-                    <div className="text-sm text-white space-y-1">
+                    <div className="text-sm text-[#edc4b3] space-y-1">
                       {notification.dates.slice(0, 5).map((date, idx) => (
                         <div key={idx}>
                           <span className="font-medium">{date.friendName}</span>: {date.title}
-                          <span className="text-gray-500 ml-2">
+                          <span className="text-[#b07d62] ml-2">
                             ({date.daysUntil === 0 ? 'Today' : `In ${date.daysUntil} days`})
                           </span>
                         </div>
@@ -160,7 +160,7 @@ const NotificationPanel = ({ isOpen, onClose }) => {
                   )}
 
                   {notification.message && (
-                    <p className="text-sm text-white mt-2">{notification.message}</p>
+                    <p className="text-sm text-[#edc4b3] mt-2">{notification.message}</p>
                   )}
                 </div>
               ))}

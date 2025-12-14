@@ -52,17 +52,17 @@ const FriendCard = ({ friend, onEdit, onViewProfile }) => {
 
   return (
     <div
-      className={`bg-[#111111] rounded-lg border border-[#222222] ${getStatusBorder()} border-l-4 p-4 cursor-pointer hover:border-[#333333] transition-all`}
+      className={`bg-[#3d241a] rounded-lg border border-[#774936] ${getStatusBorder()} border-l-4 p-4 cursor-pointer hover:border-[#8a5a44] transition-all`}
       onClick={onViewProfile}
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-white">{friend.name}</h3>
-          <p className="text-sm text-gray-500">{friend.contact}</p>
+          <h3 className="text-lg font-semibold text-[#edc4b3]">{friend.name}</h3>
+          <p className="text-sm text-[#b07d62]">{friend.contact}</p>
         </div>
         <button
           onClick={handleQuickLog}
-          className="bg-white hover:bg-gray-200 text-black text-sm px-3 py-1 rounded-lg transition-all font-medium"
+          className="bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] text-sm px-3 py-1 rounded-lg transition-all font-medium"
         >
           Log
         </button>
@@ -72,7 +72,7 @@ const FriendCard = ({ friend, onEdit, onViewProfile }) => {
         {friendCategories.map(category => (
           <span
             key={category.id}
-            className="text-xs px-2 py-1 rounded-full text-white"
+            className="text-xs px-2 py-1 rounded-full text-[#edc4b3]"
             style={{ backgroundColor: category.color }}
           >
             {category.name}
@@ -82,7 +82,7 @@ const FriendCard = ({ friend, onEdit, onViewProfile }) => {
 
       <div className="flex justify-between items-center text-sm">
         <div>
-          <p className="text-gray-500">
+          <p className="text-[#b07d62]">
             Last: {formatRelativeDate(friend.lastContacted)}
           </p>
           <p className={`font-medium mt-1 ${getStatusTextColor()}`}>
@@ -94,15 +94,15 @@ const FriendCard = ({ friend, onEdit, onViewProfile }) => {
             e.stopPropagation();
             onEdit();
           }}
-          className="text-gray-400 hover:text-white transition-colors"
+          className="text-[#c38e70] hover:text-[#edc4b3] transition-colors"
         >
           Edit
         </button>
       </div>
 
       {friend.notes && (
-        <div className="mt-3 pt-3 border-t border-[#222222]">
-          <p className="text-sm text-gray-500 italic line-clamp-2">{friend.notes}</p>
+        <div className="mt-3 pt-3 border-t border-[#774936]">
+          <p className="text-sm text-[#b07d62] italic line-clamp-2">{friend.notes}</p>
         </div>
       )}
     </div>
