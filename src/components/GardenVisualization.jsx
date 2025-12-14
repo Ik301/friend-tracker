@@ -19,13 +19,16 @@ const calculatePlantStatus = (lastContacted, contactFrequency) => {
     frequencyInDays = contactFrequency.value || 7;
   }
 
-  // Thriving: contacted recently (within frequency period)
-  // Wilting: due soon or slightly overdue (between frequency and 2x frequency)
-  // Withered: way overdue (more than 2x frequency)
+  // Calculate days until due (negative means overdue)
+  const daysUntilDue = frequencyInDays - daysSinceContact;
 
-  if (daysSinceContact <= frequencyInDays) {
+  // Thriving: more than 3 days until due
+  // Wilting: due soon (0-3 days until due) OR recently overdue (0 to -frequencyInDays days overdue)
+  // Withered: way overdue (more than frequencyInDays days overdue)
+
+  if (daysUntilDue > 3) {
     return 'thriving';
-  } else if (daysSinceContact <= frequencyInDays * 2) {
+  } else if (daysUntilDue >= -frequencyInDays) {
     return 'wilting';
   } else {
     return 'withered';
