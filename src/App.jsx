@@ -3,6 +3,7 @@ import { AppProvider } from './context/AppContext';
 import Dashboard from './components/Dashboard';
 import CategoryManager from './components/CategoryManager';
 import NotificationPanel from './components/NotificationPanel';
+import Settings from './components/Settings';
 import Login from './components/Login';
 import { getCurrentUserId, clearUserId } from './utils/localStorage';
 
@@ -66,6 +67,16 @@ function App() {
                 >
                   Categories
                 </button>
+                <button
+                  onClick={() => setCurrentView('settings')}
+                  className={`px-4 py-2 rounded-lg transition-all ${
+                    currentView === 'settings'
+                      ? 'bg-[#edc4b3] text-[#2d1810]'
+                      : 'text-[#c38e70] hover:text-[#edc4b3] hover:bg-[#4a2f1f]'
+                  }`}
+                >
+                  Settings
+                </button>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[#b07d62] text-sm">Code: {userId}</span>
@@ -102,6 +113,7 @@ function App() {
         <main className="py-6">
           {currentView === 'dashboard' && <Dashboard />}
           {currentView === 'categories' && <CategoryManager />}
+          {currentView === 'settings' && <Settings />}
         </main>
 
         {/* Notification Panel */}
