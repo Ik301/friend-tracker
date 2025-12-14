@@ -5,6 +5,7 @@ const CategoryManager = () => {
   const { categories, addCategory, updateCategory, deleteCategory, friends } = useApp();
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     defaultFrequency: { value: 1, unit: 'weeks' },
@@ -41,14 +42,17 @@ const CategoryManager = () => {
     setIsAdding(true);
   };
 
-  const handleDelete = (categoryId) => {
-    const friendsInCategory = friends.filter(f => f.categories?.includes(categoryId));
-    if (friendsInCategory.length > 0) {
-      if (!window.confirm(`${friendsInCategory.length} friend(s) are in this category. Are you sure you want to delete it?`)) {
-        return;
-      }
-    }
-    deleteCategory(categoryId);
+  const handleDeleteClick = (categoryId) => {
+    setDeleteConfirm(categoryId);
+  };
+
+  const confirmDelete = () => {
+    deleteCategory(deleteConfirm);
+    setDeleteConfirm(null);
+  };
+
+  const cancelDelete = () => {
+    setDeleteConfirm(null);
   };
 
   const colorOptions = [
@@ -175,6 +179,36 @@ const CategoryManager = () => {
         </div>
       )}
 
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={cancelDelete}
+          />
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-md w-full mx-4 bg-[#3d241a] border border-[#774936] rounded-lg z-50 p-6">
+            <h3 className="text-xl font-bold text-[#edc4b3] mb-4">Remove Plot?</h3>
+            <p className="text-[#b07d62] mb-6">
+              Are you sure you want to remove this Plot? All plants in it will be moved to General.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={confirmDelete}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors font-medium"
+              >
+                Remove Plot
+              </button>
+              <button
+                onClick={cancelDelete}
+                className="flex-1 bg-[#4a2f1f] hover:bg-[#5a3f2f] text-[#edc4b3] px-4 py-2 rounded-lg transition-colors font-medium"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
       <div className="grid gap-4">
         {categories.map(category => {
           const friendCount = friends.filter(f => f.categories?.includes(category.id)).length;
@@ -199,17 +233,32 @@ const CategoryManager = () => {
                 </div>
               </div>
               <div className="flex gap-2">
+                {/* Edit Icon */}
                 <button
                   onClick={() => handleEdit(category)}
-                  className="text-[#c38e70] hover:text-[#edc4b3] px-3 py-1 rounded transition-colors"
+                  className="text-[#c38e70] hover:text-[#edc4b3] p-2 rounded transition-colors"
+                  aria-label="Edit category"
+                  title="Edit"
                 >
-                  Edit
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
                 </button>
+
+                {/* Trash Icon */}
                 <button
-                  onClick={() => handleDelete(category.id)}
-                  className="text-red-400 hover:text-red-300 px-3 py-1 rounded transition-colors"
+                  onClick={() => handleDeleteClick(category.id)}
+                  className="text-[#78716c] hover:text-red-500 p-2 rounded transition-colors"
+                  aria-label="Delete category"
+                  title="Delete"
                 >
-                  Delete
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
                 </button>
               </div>
             </div>
