@@ -10,29 +10,15 @@ const SerendipityMode = () => {
 
   // Filter friends for serendipity
   const getEligibleFriends = () => {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date();
+    const twoWeeksAgo = new Date(today);
+    twoWeeksAgo.setDate(today.getDate() - 14);
 
-    // Find Acquaintances category
-    const acquaintancesCategory = categories.find(c => c.name.toLowerCase() === 'acquaintances');
-    const friendsCategory = categories.find(c => c.name.toLowerCase() === 'friends');
-
-    // Filter by category and last contacted
-    let eligibleFriends = friends.filter(f => {
-      const notContactedToday = f.lastContacted.split('T')[0] !== today;
-
-      if (acquaintancesCategory && f.categories?.includes(acquaintancesCategory.id)) {
-        return notContactedToday;
-      } else if (friendsCategory && f.categories?.includes(friendsCategory.id)) {
-        return notContactedToday;
-      }
-
-      return false;
+    // Filter for anyone not contacted in over 2 weeks
+    const eligibleFriends = friends.filter(f => {
+      const lastContactDate = new Date(f.lastContacted);
+      return lastContactDate < twoWeeksAgo;
     });
-
-    // If no acquaintances/friends, fall back to anyone not contacted today
-    if (eligibleFriends.length === 0) {
-      eligibleFriends = friends.filter(f => f.lastContacted.split('T')[0] !== today);
-    }
 
     return eligibleFriends;
   };
@@ -41,7 +27,7 @@ const SerendipityMode = () => {
     const eligible = getEligibleFriends();
 
     if (eligible.length === 0) {
-      alert("You've contacted everyone today! Come back tomorrow.");
+      alert("Great job! You've contacted everyone recently. No one needs a call right now.");
       return;
     }
 
