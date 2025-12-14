@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext';
 import FriendCard from './FriendCard';
 import FriendForm from './FriendForm';
 import FriendProfile from './FriendProfile';
+import GardenVisualization from './GardenVisualization';
 import { calculateNextContactDue, getContactStatus, getUpcomingDates, formatDate } from '../utils/dateHelpers';
 
 const Dashboard = () => {
@@ -115,29 +116,9 @@ const Dashboard = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
+      {/* Garden Visualization */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-[#edc4b3] mb-2">Friend Contact Tracker</h1>
-        <p className="text-[#b07d62]">Stay connected with the people who matter</p>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-[#3d241a] border border-[#774936] rounded-lg p-4">
-          <p className="text-sm text-[#b07d62]">Total Friends</p>
-          <p className="text-3xl font-bold text-[#edc4b3]">{stats.total}</p>
-        </div>
-        <div className="bg-[#3d241a] border border-orange-900/30 rounded-lg p-4">
-          <p className="text-sm text-orange-400">Due Today</p>
-          <p className="text-3xl font-bold text-orange-400">{stats.dueToday}</p>
-        </div>
-        <div className="bg-[#3d241a] border border-red-900/30 rounded-lg p-4">
-          <p className="text-sm text-red-400">Overdue</p>
-          <p className="text-3xl font-bold text-red-400">{stats.overdue}</p>
-        </div>
-        <div className="bg-[#3d241a] border border-blue-900/30 rounded-lg p-4">
-          <p className="text-sm text-blue-400">Upcoming Events</p>
-          <p className="text-3xl font-bold text-blue-400">{stats.upcomingDates}</p>
-        </div>
+        <GardenVisualization friends={friends} />
       </div>
 
       {/* Upcoming Important Dates */}
