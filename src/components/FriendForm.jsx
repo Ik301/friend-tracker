@@ -133,7 +133,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                 required
               />
             </div>
@@ -147,7 +147,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                 value={formData.contact}
                 onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
                 placeholder="Phone, email, or social media handle"
-                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                 required
               />
             </div>
@@ -160,7 +160,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                 type="date"
                 value={formData.lastContacted}
                 onChange={(e) => setFormData({ ...formData, lastContacted: e.target.value })}
-                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
               />
             </div>
 
@@ -205,7 +205,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                       value: parseInt(e.target.value)
                     }
                   })}
-                  className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                  className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                   required
                 />
               </div>
@@ -222,7 +222,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                       unit: e.target.value
                     }
                   })}
-                  className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                  className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                 >
                   <option value="days">Days</option>
                   <option value="weeks">Weeks</option>
@@ -240,7 +240,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 placeholder="What did you talk about last time?"
                 rows="3"
-                className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
               />
             </div>
 

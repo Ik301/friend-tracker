@@ -88,7 +88,7 @@ const CategoryManager = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                  className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                   required
                 />
               </div>
@@ -109,7 +109,7 @@ const CategoryManager = () => {
                         value: parseInt(e.target.value)
                       }
                     })}
-                    className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                    className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                     required
                   />
                 </div>
@@ -126,7 +126,7 @@ const CategoryManager = () => {
                         unit: e.target.value
                       }
                     })}
-                    className="w-full px-3 py-2 border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
+                    className="w-full px-3 py-2 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30"
                   >
                     <option value="days">Days</option>
                     <option value="weeks">Weeks</option>
