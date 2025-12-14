@@ -85,6 +85,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
           title: '',
           date: '',
           type: 'one-time',
+          recurringFrequency: { value: 1, unit: 'years' },
           notificationDaysBefore: 3,
           notes: ''
         }
@@ -180,7 +181,7 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                         : 'border-[#8a5a44] text-[#edc4b3] hover:border-gray-400'
                     }`}
                     style={{
-                      backgroundColor: formData.categories.includes(category.id) ? category.color : 'white'
+                      backgroundColor: formData.categories.includes(category.id) ? category.color : '#2d1810'
                     }}
                   >
                     {category.name}
@@ -260,27 +261,27 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
 
               <div className="space-y-3">
                 {formData.importantDates.map((date, index) => (
-                  <div key={date.id} className="p-3 border border-[#774936] rounded-lg">
+                  <div key={date.id} className="p-3 bg-[#2d1810] border border-[#774936] rounded-lg">
                     <div className="grid grid-cols-2 gap-2 mb-2">
                       <input
                         type="text"
                         value={date.title}
                         onChange={(e) => updateImportantDate(index, 'title', e.target.value)}
                         placeholder="Event name"
-                        className="px-2 py-1 border border-[#8a5a44] rounded text-sm"
+                        className="px-2 py-1 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded text-sm"
                       />
                       <input
                         type="date"
                         value={date.date}
                         onChange={(e) => updateImportantDate(index, 'date', e.target.value)}
-                        className="px-2 py-1 border border-[#8a5a44] rounded text-sm"
+                        className="px-2 py-1 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded text-sm"
                       />
                     </div>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center mb-2">
                       <select
                         value={date.type}
                         onChange={(e) => updateImportantDate(index, 'type', e.target.value)}
-                        className="px-2 py-1 border border-[#8a5a44] rounded text-sm flex-1"
+                        className="px-2 py-1 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded text-sm flex-1"
                       >
                         <option value="one-time">One-time</option>
                         <option value="recurring">Recurring</option>
@@ -293,6 +294,34 @@ const FriendForm = ({ friend = null, onClose, onSuccess }) => {
                         Remove
                       </button>
                     </div>
+                    {date.type === 'recurring' && (
+                      <div className="grid grid-cols-2 gap-2">
+                        <input
+                          type="number"
+                          min="1"
+                          value={date.recurringFrequency?.value || 1}
+                          onChange={(e) => updateImportantDate(index, 'recurringFrequency', {
+                            ...date.recurringFrequency,
+                            value: parseInt(e.target.value)
+                          })}
+                          placeholder="Frequency"
+                          className="px-2 py-1 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded text-sm"
+                        />
+                        <select
+                          value={date.recurringFrequency?.unit || 'years'}
+                          onChange={(e) => updateImportantDate(index, 'recurringFrequency', {
+                            ...date.recurringFrequency,
+                            unit: e.target.value
+                          })}
+                          className="px-2 py-1 bg-[#2d1810] text-[#edc4b3] border border-[#8a5a44] rounded text-sm"
+                        >
+                          <option value="days">Days</option>
+                          <option value="weeks">Weeks</option>
+                          <option value="months">Months</option>
+                          <option value="years">Years</option>
+                        </select>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

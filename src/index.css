@@ -57,16 +57,6 @@ body {
   }
 }
 
-@keyframes scaleIn {
-  from {
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
 
 @keyframes fadeIn {
   from {
@@ -81,9 +71,6 @@ body {
   animation: slideUp 0.3s ease-out;
 }
 
-.animate-scale-in {
-  animation: scaleIn 0.2s ease-out;
-}
 
 .animate-fade-in {
   animation: fadeIn 0.2s ease-out;

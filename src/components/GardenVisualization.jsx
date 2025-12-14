@@ -125,7 +125,7 @@ const PlantCareCard = ({ friend, status, onClose, onWater }) => {
       />
 
       {/* Card - Bottom sheet on mobile, centered on desktop */}
-      <div className="fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:rounded-lg bg-[#3d241a] border border-[#774936] rounded-t-2xl md:rounded-b-2xl z-50 animate-slide-up md:animate-scale-in">
+      <div className="fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-md md:rounded-lg bg-[#3d241a] border border-[#774936] rounded-t-2xl md:rounded-b-2xl z-50 animate-slide-up">
         {/* Handle bar for mobile */}
         <div className="md:hidden flex justify-center pt-3 pb-2">
           <div className="w-12 h-1 bg-[#774936] rounded-full" />
