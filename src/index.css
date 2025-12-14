@@ -20,6 +20,16 @@ body {
   min-height: 100vh;
   background-color: #2d1810;
   color: #edc4b3;
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 * {
@@ -49,11 +59,9 @@ body {
 @keyframes slideUp {
   from {
     transform: translateY(100%);
-    opacity: 0;
   }
   to {
     transform: translateY(0);
-    opacity: 1;
   }
 }
 
