@@ -2,14 +2,26 @@ import { useState } from 'react';
 import { useApp } from '../context/AppContext';
 
 // Helper function to calculate plant health status
-const calculatePlantStatus = (lastContacted, frequency) => {
+const calculatePlantStatus = (lastContacted, contactFrequency) => {
   const today = new Date();
   const lastContact = new Date(lastContacted);
   const daysSinceContact = Math.floor((today - lastContact) / (1000 * 60 * 60 * 24));
 
-  if (daysSinceContact < frequency) {
+  // Convert frequency to days
+  let frequencyInDays;
+  if (contactFrequency.unit === 'days') {
+    frequencyInDays = contactFrequency.value;
+  } else if (contactFrequency.unit === 'weeks') {
+    frequencyInDays = contactFrequency.value * 7;
+  } else if (contactFrequency.unit === 'months') {
+    frequencyInDays = contactFrequency.value * 30;
+  } else {
+    frequencyInDays = contactFrequency.value || 7;
+  }
+
+  if (daysSinceContact < frequencyInDays) {
     return 'thriving';
-  } else if (daysSinceContact < frequency * 2) {
+  } else if (daysSinceContact < frequencyInDays * 2) {
     return 'wilting';
   } else {
     return 'withered';
@@ -245,8 +257,7 @@ const GardenVisualization = ({ friends }) => {
                 }}
               >
                 {categoryFriends.map((friend) => {
-                  const frequency = friend.contactFrequency?.value || 7;
-                  const status = calculatePlantStatus(friend.lastContacted, frequency);
+                  const status = calculatePlantStatus(friend.lastContacted, friend.contactFrequency || { value: 7, unit: 'days' });
 
                   return (
                     <button
@@ -292,8 +303,7 @@ const GardenVisualization = ({ friends }) => {
               }}
             >
               {uncategorizedFriends.map((friend) => {
-                const frequency = friend.contactFrequency?.value || 7;
-                const status = calculatePlantStatus(friend.lastContacted, frequency);
+                const status = calculatePlantStatus(friend.lastContacted, friend.contactFrequency || { value: 7, unit: 'days' });
 
                 return (
                   <button
@@ -327,7 +337,7 @@ const GardenVisualization = ({ friends }) => {
             <PlantIcon status="thriving" />
           </div>
           <p className="text-2xl font-bold text-green-400">
-            {friends.filter(f => calculatePlantStatus(f.lastContacted, f.contactFrequency?.value || 7) === 'thriving').length}
+            {friends.filter(f => calculatePlantStatus(f.lastContacted, f.contactFrequency || { value: 7, unit: 'days' }) === 'thriving').length}
           </p>
           <p className="text-xs text-[#b07d62] mt-1">Thriving</p>
         </div>
@@ -337,7 +347,7 @@ const GardenVisualization = ({ friends }) => {
             <PlantIcon status="wilting" />
           </div>
           <p className="text-2xl font-bold text-orange-400">
-            {friends.filter(f => calculatePlantStatus(f.lastContacted, f.contactFrequency?.value || 7) === 'wilting').length}
+            {friends.filter(f => calculatePlantStatus(f.lastContacted, f.contactFrequency || { value: 7, unit: 'days' }) === 'wilting').length}
           </p>
           <p className="text-xs text-[#b07d62] mt-1">Wilting</p>
         </div>
@@ -347,7 +357,7 @@ const GardenVisualization = ({ friends }) => {
             <PlantIcon status="withered" />
           </div>
           <p className="text-2xl font-bold text-red-400">
-            {friends.filter(f => calculatePlantStatus(f.lastContacted, f.contactFrequency?.value || 7) === 'withered').length}
+            {friends.filter(f => calculatePlantStatus(f.lastContacted, f.contactFrequency || { value: 7, unit: 'days' }) === 'withered').length}
           </p>
           <p className="text-xs text-[#b07d62] mt-1">Withered</p>
         </div>
@@ -357,7 +367,7 @@ const GardenVisualization = ({ friends }) => {
       {selectedFriend && (
         <PlantCareCard
           friend={selectedFriend}
-          status={calculatePlantStatus(selectedFriend.lastContacted, selectedFriend.contactFrequency?.value || 7)}
+          status={calculatePlantStatus(selectedFriend.lastContacted, selectedFriend.contactFrequency || { value: 7, unit: 'days' })}
           onClose={() => setSelectedFriend(null)}
           onWater={handleWater}
         />
