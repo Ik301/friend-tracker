@@ -130,16 +130,16 @@ const FriendProfile = ({ friend, onClose, onEdit }) => {
                 <div key={contact.id} className="bg-[#2d1810] p-3 rounded-lg">
                   <div className="flex justify-between items-start">
                     <div>
-                      <p className="text-sm font-medium text-[#edc4b3]">
+                      <p className="text-sm font-bold text-[#edc4b3]">
+                        {formatRelativeDate(contact.date)}
+                      </p>
+                      <p className="text-xs text-[#9d6b53] mt-0.5">
                         {formatDate(contact.date)}
                       </p>
                       {contact.notes && (
                         <p className="text-sm text-[#c38e70] mt-1">{contact.notes}</p>
                       )}
                     </div>
-                    <span className="text-xs text-[#b07d62]">
-                      {formatRelativeDate(contact.date)}
-                    </span>
                   </div>
                 </div>
               ))}

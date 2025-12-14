@@ -231,6 +231,16 @@ const GardenVisualization = ({ friends }) => {
     );
   }
 
+  // Get category color for each friend (if they have one)
+  const getFriendCategoryColor = (friend) => {
+    if (!friend.categories || friend.categories.length === 0) {
+      return '#9d6b53'; // Default brown for uncategorized
+    }
+    // Use the first category's color
+    const firstCategory = categories.find(cat => cat.id === friend.categories[0]);
+    return firstCategory?.color || '#9d6b53';
+  };
+
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-6">
@@ -238,103 +248,48 @@ const GardenVisualization = ({ friends }) => {
         <p className="text-[#b07d62] text-sm">Tap a plant to care for your relationship</p>
       </div>
 
-      {/* Category Plots */}
-      <div className="space-y-8 mb-8">
-        {categories.map(category => {
-          const categoryFriends = friendsByCategory[category.id];
-          if (!categoryFriends || categoryFriends.length === 0) return null;
+      {/* Unified Garden Bed - All Plants Mixed Together */}
+      <div
+        className="bg-[#3d241a] rounded-lg p-6 mb-8 relative overflow-hidden"
+        style={{
+          background: 'radial-gradient(circle at 30% 40%, #4a2f1f 0%, #3d241a 50%, #2d1810 100%)'
+        }}
+      >
+        {/* Plants Grid - All Friends Mixed */}
+        <div
+          className="grid gap-4"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))',
+          }}
+        >
+          {friends.map((friend) => {
+            const status = calculatePlantStatus(friend.lastContacted, friend.contactFrequency || { value: 7, unit: 'days' });
+            const borderColor = getFriendCategoryColor(friend);
 
-          return (
-            <div key={category.id} className="bg-[#3d241a] border-2 rounded-lg p-4" style={{ borderColor: category.color }}>
-              {/* Plot Header */}
-              <div className="flex items-center gap-3 mb-4">
-                <div
-                  className="w-4 h-4 rounded"
-                  style={{ backgroundColor: category.color }}
-                />
-                <h3 className="text-lg font-semibold text-[#edc4b3]">{category.name}</h3>
-                <span className="text-sm text-[#b07d62]">({categoryFriends.length} plant{categoryFriends.length !== 1 ? 's' : ''})</span>
-              </div>
-
-              {/* Plants Grid */}
-              <div
-                className="grid gap-3"
+            return (
+              <button
+                key={friend.id}
+                onClick={() => handlePlantClick(friend)}
+                className="group relative aspect-square bg-[#2d1810]/50 rounded-lg hover:bg-[#2d1810] transition-all focus:outline-none focus:ring-2 focus:ring-[#c38e70] focus:ring-offset-2 focus:ring-offset-[#3d241a] min-h-[66px] min-w-[66px]"
                 style={{
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
+                  border: `3px solid ${borderColor}`,
                 }}
+                aria-label={`${friend.name} - ${status}`}
               >
-                {categoryFriends.map((friend) => {
-                  const status = calculatePlantStatus(friend.lastContacted, friend.contactFrequency || { value: 7, unit: 'days' });
+                <div className="p-3 w-full h-full">
+                  <PlantIcon status={status} />
+                </div>
 
-                  return (
-                    <button
-                      key={`${category.id}-${friend.id}`}
-                      onClick={() => handlePlantClick(friend)}
-                      className="group relative aspect-square bg-[#2d1810] rounded-lg border-2 hover:border-[#c38e70] transition-all focus:outline-none focus:ring-2 focus:ring-[#c38e70] focus:ring-offset-2 focus:ring-offset-[#3d241a] min-h-[44px] min-w-[44px]"
-                      style={{ borderColor: category.color + '80' }}
-                      aria-label={`${friend.name} - ${status}`}
-                    >
-                      <div className="p-2 w-full h-full">
-                        <PlantIcon status={status} />
-                      </div>
-
-                      {/* Name label on hover (desktop only) */}
-                      <div className="hidden md:block absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                        <div className="bg-[#2d1810] border border-[#774936] px-2 py-1 rounded text-xs text-[#edc4b3] whitespace-nowrap">
-                          {friend.name}
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-
-        {/* General/Uncategorized Plot */}
-        {uncategorizedFriends.length > 0 && (
-          <div className="bg-[#3d241a] border-2 border-[#774936] rounded-lg p-4">
-            {/* Plot Header */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-4 h-4 rounded bg-[#9d6b53]" />
-              <h3 className="text-lg font-semibold text-[#edc4b3]">General</h3>
-              <span className="text-sm text-[#b07d62]">({uncategorizedFriends.length} plant{uncategorizedFriends.length !== 1 ? 's' : ''})</span>
-            </div>
-
-            {/* Plants Grid */}
-            <div
-              className="grid gap-3"
-              style={{
-                gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
-              }}
-            >
-              {uncategorizedFriends.map((friend) => {
-                const status = calculatePlantStatus(friend.lastContacted, friend.contactFrequency || { value: 7, unit: 'days' });
-
-                return (
-                  <button
-                    key={friend.id}
-                    onClick={() => handlePlantClick(friend)}
-                    className="group relative aspect-square bg-[#2d1810] rounded-lg border-2 border-[#774936] hover:border-[#c38e70] transition-all focus:outline-none focus:ring-2 focus:ring-[#c38e70] focus:ring-offset-2 focus:ring-offset-[#3d241a] min-h-[44px] min-w-[44px]"
-                    aria-label={`${friend.name} - ${status}`}
-                  >
-                    <div className="p-2 w-full h-full">
-                      <PlantIcon status={status} />
-                    </div>
-
-                    {/* Name label on hover (desktop only) */}
-                    <div className="hidden md:block absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                      <div className="bg-[#2d1810] border border-[#774936] px-2 py-1 rounded text-xs text-[#edc4b3] whitespace-nowrap">
-                        {friend.name}
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
+                {/* Name label on hover (desktop only) */}
+                <div className="hidden md:block absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                  <div className="bg-[#2d1810] border border-[#774936] px-2 py-1 rounded text-xs text-[#edc4b3] whitespace-nowrap">
+                    {friend.name}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Summary Stats */}

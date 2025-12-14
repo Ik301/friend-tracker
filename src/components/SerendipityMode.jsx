@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { formatRelativeDateLong } from '../utils/dateHelpers';
 
 const SerendipityMode = () => {
   const { friends, categories, logContact } = useApp();
@@ -149,6 +150,11 @@ const SerendipityMode = () => {
             <h2 className="text-3xl font-bold text-[#edc4b3] mb-2">
               {selectedFriend.name}
             </h2>
+
+            {/* Last Spoke */}
+            <p className="text-[#c38e70] text-sm mb-1">
+              Last Spoke: {formatRelativeDateLong(selectedFriend.lastContacted)}
+            </p>
 
             {/* Contact info */}
             <p className="text-[#b07d62] mb-6">
