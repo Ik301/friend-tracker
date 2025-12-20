@@ -4,11 +4,13 @@ import FriendCard from './FriendCard';
 import FriendForm from './FriendForm';
 import FriendProfile from './FriendProfile';
 import GardenVisualization from './GardenVisualization';
+import ImportWizard from './ImportWizard';
 import { calculateNextContactDue, getContactStatus, getUpcomingDates, formatDate } from '../utils/dateHelpers';
 
 const Dashboard = () => {
   const { friends, categories } = useApp();
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showImportWizard, setShowImportWizard] = useState(false);
   const [editingFriend, setEditingFriend] = useState(null);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -151,12 +153,21 @@ const Dashboard = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 px-4 py-2 bg-[#2d1810] border border-[#774936] text-[#edc4b3] placeholder-[#9d6b53] rounded-lg focus:ring-2 focus:ring-white/20 focus:border-white/30 transition-all"
           />
-          <button
-            onClick={() => setShowAddForm(true)}
-            className="bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] px-6 py-2 rounded-lg transition-all whitespace-nowrap font-medium"
-          >
-            + Add Friend
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowImportWizard(true)}
+              className="bg-[#3d241a] hover:bg-[#4a2f1f] text-[#c38e70] px-6 py-2 rounded-lg transition-all whitespace-nowrap font-medium border border-[#774936]"
+              title="Import contacts from CSV or vCard"
+            >
+              🌱 Sow Seeds
+            </button>
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="bg-[#c38e70] hover:bg-[#b07d62] text-[#2d1810] px-6 py-2 rounded-lg transition-all whitespace-nowrap font-medium"
+            >
+              + Add Friend
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-4">
@@ -245,6 +256,12 @@ const Dashboard = () => {
         <FriendForm
           onClose={() => setShowAddForm(false)}
           onSuccess={() => setShowAddForm(false)}
+        />
+      )}
+
+      {showImportWizard && (
+        <ImportWizard
+          onClose={() => setShowImportWizard(false)}
         />
       )}
 
